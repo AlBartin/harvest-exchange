@@ -24,6 +24,11 @@ default: &default
 development:
   <<: *default
   database: harvest_project_development
+  host: localhost
+  port: 5432
+  user: alanm
+  password:
+
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -58,6 +63,10 @@ development:
 test:
   <<: *default
   database: harvest_project_test
+  port: 5432
+  user: alanm
+  password:
+
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +90,7 @@ test:
 #
 production:
   <<: *default
-  database: harvest_project_production
-  username: harvest_project
-  password: <%= ENV['HARVEST_PROJECT_DATABASE_PASSWORD'] %>
+  url: <%= ENV['MY_APP_DATABASE_URL'] %>
+  # database: harvest_project_production
+  # username: harvest_project
+  # password: <%= ENV['HARVEST_PROJECT_DATABASE_PASSWORD'] %>

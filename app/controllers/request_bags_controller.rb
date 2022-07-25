@@ -1,0 +1,2 @@
+class RequestBagsController < ApplicationController
+end

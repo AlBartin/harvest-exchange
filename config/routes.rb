@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get '/hello', to: 'application#hello_world'
+  resources :deals
+  resources :counters
+  resources :counter_bags
+  resources :requests
+  resources :request_bags
+  resources :bags
+  resources :users
+  
+  post 'signup', to: 'users#create'
+  get 'users', to: 'users#index'
+  
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+
+
 end
