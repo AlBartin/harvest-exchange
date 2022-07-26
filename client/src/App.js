@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar'
 import SignupForm from './components/SignupForm'
 import Login from './components/Login'
-import Profile from "./components/Profile";
+import MyProfile from "./components/MyProfile";
 import BrowseUsers from './components/BrowseUsers'
 import AddItem from "./components/AddItem";
+import Logout from "./components/Logout";
+import ItemsContainer from "./components/ItemsContainer"
 
 function App() {
 
@@ -17,7 +19,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/users" element={<BrowseUsers />} />
         <Route path="/signup" element={<SignupForm />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/my-profile" element={<MyProfile />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/all-items" element={<ItemsContainer />} />
       </Routes>
     </Router>
   )

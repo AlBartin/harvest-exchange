@@ -5,7 +5,8 @@ export const signupState = atom({
     default: {
         'email': '',
         'username': '',
-        'passwordDigest': '',
+        'password': '',
+        'passwordConfirm': '',
         'avatarUrl': '',
         'personalImage': '',
         'cropsGrown': '',
@@ -19,11 +20,29 @@ export const signupState = atom({
 
 export const currentUserState = atom({
     key: 'currentUserState',
-    default: null
+    default: JSON.parse(localStorage.getItem('user'))
 })
 
 
 export const usersState = atom({
     key: 'usersState',
     default: []
+})
+
+export const itemState = atom({
+    key: 'itemState',
+    default: []
+})
+
+export const newItemState = atom({
+    key: 'newItemState',
+    default: {
+        'user': '',
+        'itemName': '',
+        'imageUrl': '',
+        'descriptions': '',
+        'harvestDate': '',
+        'quantity': '',
+        'measurementUnits': ''
+    }
 })

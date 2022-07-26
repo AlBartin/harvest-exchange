@@ -9,7 +9,7 @@ function Navbar() {
 
     return (
         <header>
-        <nav className="nav-bar">
+        <nav className="Navbar">
             <NavLink to= '/' className='nav-links'>Home</NavLink>
             <NavLink to="/all-items" className="nav-links">All Crops</NavLink>
             <NavLink to="/events" className="nav-links">Events</NavLink>
@@ -22,7 +22,7 @@ function Navbar() {
             } */}
             { currentUser ?
 		    <div>
-            <NavLink to="/profile" className="nav-links">Profile</NavLink>
+            <NavLink to="/my-profile" className="nav-links">My Profile</NavLink>
             <NavLink to="/logout" className="nav-links">Logout</NavLink>
             </div>
 		    : 

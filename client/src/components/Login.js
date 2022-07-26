@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { currentUserState } from '../recoil/atoms'
 import axios from 'axios'
-import { ThemeContext } from '@emotion/react'
+import api from '../api/posts'
 
 const Login = () => {
     let navigate = useNavigate()
@@ -26,18 +26,18 @@ const Login = () => {
 
     const handleChange = (e) => setLoginForm ({...loginForm, [e.target.name]: e.target.value})
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        axios.post('login',{
-            username: loginForm.username,
-            password: loginForm.password
-            }
-        )
-        .then((response) => {
-            setCurrentUser(response.data)
-            navigate('/users', { replace: true })
-        })
-        .catch((err) => {
+        try {
+            const response = await api.post('login',{
+                username: loginForm.username,
+                password: loginForm.password
+            })
+        setCurrentUser(response.data)
+        localStorage.setItem('user', JSON.stringify(response.data))
+        navigate('/my-profile')
+        }
+        catch(err) {
             if (!err?.response) {
                 setErrorMessage('No Server Response')
             } else if (err.response?.status === 400) {
@@ -48,7 +48,7 @@ const Login = () => {
                 setErrorMessage('Login Failed')
             }
             errRef.current.focus()
-        })
+        }
     }
 
 
@@ -71,7 +71,6 @@ const Login = () => {
             <input 
                 type='password' 
                 name='password' 
-                ref={userRef}
                 value={loginForm.password}
                 onChange={handleChange}
                 required
