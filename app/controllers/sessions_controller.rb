@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    
     def create
       user = User.find_by(username: params[:username])
       if user&.authenticate(params[:password])
@@ -10,11 +11,6 @@ class SessionsController < ApplicationController
     end
   
     def destroy
-      if session[:user_id]
-        session.delete :user_id
-        head :no_content
-      else
-        render json: { errors: ['Unauthorized action'] }, status: 401
-      end  
+        session[:user_id] = nil
     end
   end

@@ -46,3 +46,33 @@ export const newItemState = atom({
         'measurementUnits': ''
     }
 })
+
+export const requestState = atom({
+    key: 'requestState',
+    default: ''
+})
+
+export const requestBagState = atom({
+    key: 'requestBagState',
+    default: []
+})
+
+export const counterState = atom({
+    key: 'counterState',
+    default: ''
+})
+
+export const counterBagState = atom({
+    key: 'counterBagState',
+    default: []
+})
+
+export const dealState = atom({
+    key: 'dealState',
+    default: []
+})
+
+export const userBasketState = atom({
+    key: 'userBasketState',
+    default: []
+})

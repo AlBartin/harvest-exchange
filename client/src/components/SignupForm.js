@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil'
 import axios from 'axios'
 import { Image, Transformation } from 'cloudinary-react'
@@ -44,14 +44,6 @@ function SignupForm() {
       })
   }
 
-  // useEffect(() => {
-  //   setSignupData({...signupData, [avatar_url]: image})
-  // },[image])
-
-  // useEffect(() => {
-  //   setSignupData({...signupData, [personal_image]: gardenImage})
-  // },[gardenImage])
-
   const handleFormSubmit = async (e) => {
     e.preventDefault()
       console.log(`New user: ${signupData}`)
@@ -74,7 +66,7 @@ function SignupForm() {
       try {
         const response = await api.post('signup', newUser)
         setSignupData(response.data)
-        navigate('/users')
+        navigate('/login')
       } catch (error) {
         console.log(`Error: ${error.message}`)
       }
@@ -133,7 +125,7 @@ function SignupForm() {
       <label>Show us your garden:</label>
         <input type='file' onChange={(e) => {setImageSelected(e.target.files[0])}} /><button onClick={uploadGardenImage}>Upload Image</button><br/>
         <Image cloudName={'chenkhov'} publicId={gardenImage}>
-        <Transformation width="500" height="500" crop="scale" />
+        <Transformation width="500" crop="scale" />
         </Image> <br/>
       </div>
 
@@ -141,7 +133,7 @@ function SignupForm() {
       <label>Profile Avatar</label>
         <input type='file' onChange={(e) => {setImageSelected(e.target.files[0])}} /><button onClick={uploadAvatarImage}>Upload Image</button><br/>
         <Image cloudName={'chenkhov'} publicId={image}>
-        <Transformation width="250" height="250" crop="scale" />
+        <Transformation height="250" crop="scale" />
         </Image> <br/>
       </div>
     </div>

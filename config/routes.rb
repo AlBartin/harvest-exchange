@@ -13,5 +13,9 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
+  get 'all-items', to: 'bags#index'
+  post 'add-item', to: 'bags#create'
+
+  post 'request', to: 'requests#create'
 
 end

@@ -9,4 +9,14 @@ class User < ApplicationRecord
 
     validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: "please enter a valid email address" }
     validates :username, presence: true, uniqueness: true
+
+    
+      def all_bags
+        self.bags.all
+      end
+
+
+
+
+
 end

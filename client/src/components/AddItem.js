@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import api from '../api/posts'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue, useRecoilState, useResetRecoilState } from 'recoil'
-import { newItemState, currentUserState } from '../recoil/atoms'
+import { newItemState, currentUserState, userBasketState } from '../recoil/atoms'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
+
 
 import { Image, Transformation } from 'cloudinary-react'
 
@@ -13,15 +14,15 @@ const AddItem = () => {
 
     const currentUser = useRecoilValue(currentUserState)
     let navigate = useNavigate()
-    
+    const [userBasket, setUserBasket] = useRecoilState(userBasketState)
     const [newItem, setNewItem] = useRecoilState(newItemState)
     const resetForm = useResetRecoilState(newItemState)
     const [imageSelected, setImageSelected] = useState('')
     const [image, setImage] = useState('')
     const [startDate, setStartDate] = useState(new Date());
     const units = ['', 'lbs', 'kgs', 'units', 'oz']
+      
 
-    //*******THIS WORKS*************
     const uploadImage = (files) => {
         const formData = new FormData()
         formData.append("file", imageSelected)
@@ -30,19 +31,6 @@ const AddItem = () => {
         axios.post("https://api.cloudinary.com/v1_1/chenkhov/image/upload", formData)
         .then((resp) => {setImage(resp.data.public_id)})
     }
-
-    // const uploadImage = async (files) => {
-    //     const formData = new FormData()
-    //     formData.append("file", imageSelected)
-    //     formData.append("upload_preset", "oxthdym5")
-    //     try {
-    //     const response = axios.post("https://api.cloudinary.com/v1_1/chenkhov/image/upload", formData)
-    //     setImage(response.data.public_id)
-    //     } catch (error) {
-    //         console.log(`Error: ${error.message}`)
-    //     }
-
-    // }
 
     const handleChange = (e) => {
         setNewItem({
@@ -66,7 +54,8 @@ const AddItem = () => {
   
         try {
           const response = await api.post('add-item', postItem)
-          setNewItem(response.data)
+          setUserBasket([...userBasket, response.data])
+          resetForm()
           navigate('/my-profile')
         } catch (error) {
           console.log(`Error: ${error.message}`)

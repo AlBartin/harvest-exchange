@@ -1,18 +1,28 @@
 import React from 'react'
 import { Image, Transformation } from 'cloudinary-react'
-import { usersState } from '../recoil/atoms'
-import { useRecoilValue } from 'recoil'
-
+import { usersState, requestState } from '../recoil/atoms'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import api from '../api/posts'
 
 function ItemCard({ item }) {
 
     const user = useRecoilValue(usersState)
-    //const [userBasket, setUserBasket] = useState('')
-
+    const [request, setRequest] = useRecoilState(requestState)
+    const handleRequest = async () => {
+        const newRequest = {
+            user_id: user.id
+        }
+        try{
+            const response = await api.post('request', {newRequest})
+            setRequest(response)
+        } catch(error) {
+            console.log(`Error: ${error.message}`)
+        }
+    }
 
     return (
     <div>
-        <div class="card">
+        <div className="card">
             <Image cloudName={'chenkhov'} publicId={item.image_url} alt={item.item_name}>
                 <Transformation aspectRatio="1:1" background="#ffffff" border="0px_solid_rgb:ffffff" gravity="auto" width="175" crop="fill" />
             </Image>
@@ -20,8 +30,7 @@ function ItemCard({ item }) {
         <h2 name={item.id}> {item.item_name}</h2>
         <p>Description: {item.descriptions}</p>
         <p>Quantity: {item.quantity} {item.measurement_units}</p>
-        <p>In {user.username}'s basket</p>
-        <p><button className="item-button">Initiate Trade</button></p>
+        <p><button className="item-button" onClick={handleRequest}>Initiate Trade</button></p>
         </div>
     </div>
     </div>

@@ -30,8 +30,8 @@ class UsersController < ApplicationController
       end
 
       def destroy
-        @user.destroy
-        head :no_content
+        user = User.find(params[:id])
+        user.destroy
       end
 
       private

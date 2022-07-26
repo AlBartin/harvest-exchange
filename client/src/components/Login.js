@@ -1,9 +1,8 @@
 import React from 'react'
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
-import { currentUserState } from '../recoil/atoms'
-import axios from 'axios'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { currentUserState, userBasketState } from '../recoil/atoms'
 import api from '../api/posts'
 
 const Login = () => {
@@ -15,6 +14,7 @@ const Login = () => {
     const [pass, setPass] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const [loginForm, setLoginForm] = useState('')
+    const setUserBasket = useSetRecoilState(userBasketState)
 
     useEffect(() => {
         userRef.current.focus()
@@ -34,6 +34,7 @@ const Login = () => {
                 password: loginForm.password
             })
         setCurrentUser(response.data)
+        setUserBasket(response.data.all_bags)
         localStorage.setItem('user', JSON.stringify(response.data))
         navigate('/my-profile')
         }

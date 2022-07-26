@@ -3,6 +3,7 @@ class CreateBags < ActiveRecord::Migration[6.1]
     create_table :bags do |t|
       t.references :user, null: false, foreign_key: true
       t.string :item_name
+      t.string :image_url
       t.text :descriptions
       t.timestamp :harvest_date
       t.integer :quantity

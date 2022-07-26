@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2022_07_22_065312) do
   create_table "bags", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "item_name"
+    t.string "image_url"
     t.text "descriptions"
     t.datetime "harvest_date"
     t.integer "quantity"
