@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   
   post 'signup', to: 'users#create'
   get 'users', to: 'users#index'
+  get 'counter-user/:id', to: 'users#show'
   
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
@@ -17,5 +18,11 @@ Rails.application.routes.draw do
   post 'add-item', to: 'bags#create'
 
   post 'request', to: 'requests#create'
+  delete 'request/:id', to: 'requests#destroy'
 
+  post 'counter', to: 'counters#create'
+  delete 'counter/:id', to: 'counter#destroy'
+
+  post 'deal', to: 'deals#create'
+  
 end

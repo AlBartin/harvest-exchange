@@ -7,8 +7,8 @@ class UsersController < ApplicationController
       end
       
       def show
-        if @current_user
-          render json: @current_user
+        user = User.find(params[:id])
+          render json: user
         else
           render json: { errors: ["Unauthorized action"] }, status: 401
         end
