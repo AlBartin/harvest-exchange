@@ -14,22 +14,22 @@ function ItemCard({ item }) {
     const [counterOffer, setCounterOffer] = useRecoilState(counterOfferState)
     const [deal, setDeal] = useRecoilState(dealState)
 
-        const handleDeal = async () => {
-            const newDeal = {
-                ...deal,
-                request_id: request.id,
-                request_finalized: false,
-                counter_finalized: false
-            }
-            try {
-                const dealResp = await api.post('deal', newDeal)
-                setDeal(dealResp.data)
-                navigate('/current-trades')
-            } catch(error) {
-                console.log(`Error: ${error.message}`)
-            }
-            console.log(deal)
-        }
+        // const handleDeal = async () => {
+        //     const newDeal = {
+        //         ...deal,
+        //         request_id: request.id,
+        //         request_finalized: false,
+        //         counter_finalized: false
+        //     }
+        //     try {
+        //         const dealResp = await api.post('deal', newDeal)
+        //         setDeal(dealResp.data)
+        //         navigate('/current-trades')
+        //     } catch(error) {
+        //         console.log(`Error: ${error.message}`)
+        //     }
+        //     console.log(deal)
+        // }
 
 
 
@@ -43,11 +43,12 @@ function ItemCard({ item }) {
             const requestResp = await api.post('request', newRequest)
             setRequest(requestResp.data)
             setRequestBag([...requestBag, item])
-            console.log(requestResp.data)
-            console.log(requestResp.data.id)
-            const requestID = {request_id: requestResp.data.id}
-            setDeal({...deal, ...requestID})
-            console.log(deal)
+            //setRequestUserId(requestResp.user_id)
+            // console.log(requestResp.data)
+            // console.log(requestResp.data.id)
+            // const requestID = {request_id: requestResp.data.id}
+            // setDeal({...deal, ...requestID})
+            // console.log(deal)
         } catch(error) {
             console.log(`Error: ${error.message}`)
         }
@@ -58,14 +59,15 @@ function ItemCard({ item }) {
         try {
             const counterResp = await api.post('counter', newCounterOffer)
             setCounterOffer(counterResp.data)
-            console.log(counterResp.data)
-            console.log(counterResp.data.id)
-            const counterID = {counter_id: counterResp.data.id}
-            setDeal({...deal, ...counterID})
+            // console.log(counterResp.data)
+            // console.log(counterResp.data.id)
+            // const counterID = {counter_id: counterResp.data.id}
+            // setDeal({...deal, ...counterID})
+            navigate('/current-trades')
         } catch(error) {
             console.log(`Error: ${error.message}`)
         }
-        handleDeal();
+//        handleDeal();
 
         // const newDeal = {
         //     request_id: requestResp.data.id,

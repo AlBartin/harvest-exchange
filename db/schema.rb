@@ -31,9 +31,7 @@ ActiveRecord::Schema.define(version: 2022_07_22_065312) do
   create_table "counter_bags", force: :cascade do |t|
     t.bigint "counter_id", null: false
     t.bigint "bag_id", null: false
-    t.string "item_name"
-    t.integer "quantity"
-    t.string "measurement_units"
+    t.integer "counter_quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bag_id"], name: "index_counter_bags_on_bag_id"
@@ -61,9 +59,7 @@ ActiveRecord::Schema.define(version: 2022_07_22_065312) do
   create_table "request_bags", force: :cascade do |t|
     t.bigint "request_id", null: false
     t.bigint "bag_id", null: false
-    t.string "item_name"
-    t.integer "quantity"
-    t.string "measurement_units"
+    t.integer "request_quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bag_id"], name: "index_request_bags_on_bag_id"

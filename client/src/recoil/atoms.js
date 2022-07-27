@@ -64,7 +64,12 @@ export const counterOfferState = atom({
 
 export const counterOfferBagState = atom({
     key: 'counterOfferBagState',
-    default: []
+    default: null
+        // counter_id: '',
+        // bag_id: '',
+        // item_name: '',
+        // quantity: '',
+        // measurement_units: ''
 })
 
 export const counterOfferUserState = atom({

@@ -4,6 +4,8 @@ class User < ApplicationRecord
     has_many :counters
     has_many :request_bags, through: :bags
     has_many :counter_bags, through: :bags
+    has_many :deals, through: :requests
+    has_many :deals, through: :counters
 
     has_secure_password
 
@@ -15,7 +17,13 @@ class User < ApplicationRecord
         self.bags.all
       end
 
+      def all_requests
+        self.requests.all
+      end
 
+      def all_counters
+        self.counters.all
+      end
 
 
 

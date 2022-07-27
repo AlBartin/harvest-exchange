@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   post 'counter', to: 'counters#create'
   delete 'counter/:id', to: 'counter#destroy'
 
+  post 'counter-bag', to: 'counter_bags#create'
+  delete 'counter-bag/:id', to: 'counter_bags#destroy'
+
   post 'deal', to: 'deals#create'
   
 end
