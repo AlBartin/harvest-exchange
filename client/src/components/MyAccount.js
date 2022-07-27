@@ -11,12 +11,7 @@ function MyAccount () {
     const currentUser = useRecoilValue(currentUserState)
     const {username, email, avatar_url, street_address, city_address, state_address, zipcode} = currentUser
     const userBasket = useRecoilValue(userBasketState)
-
-
-      console.log(userBasket)
-      console.log("this just fired off")
-
-
+    
     const userItems = userBasket.map((product) => <ItemCard key={product.id} item={product} />)
     
     return (

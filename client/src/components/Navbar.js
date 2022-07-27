@@ -10,9 +10,12 @@ function Navbar() {
         <header>
         <nav className="Navbar">
             <NavLink to= '/' className='nav-links'>Home</NavLink>
-            <NavLink to="/all-items" className="nav-links">All Crops</NavLink>
+            <NavLink to="/all-items" className="nav-links">All Products</NavLink>
             <NavLink to="/events" className="nav-links">Events</NavLink>
             <NavLink to="/users" className="nav-links">Users</NavLink>
+            {currentUser ? <NavLink to="/current-trades" className="nav-links">Trades In Progress</NavLink>
+            :
+            null}
             { currentUser ? <NavLink to="/add-item" className="nav-links">Add Items</NavLink>
             :
             null}
