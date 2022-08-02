@@ -4,6 +4,11 @@ class CounterBagsController < ApplicationController
         render json: new_counter_bag, status: :created
      end
 
+     def destroy
+      counter = CounterBag.find(params[:id])
+      counter.destroy
+      end
+
      private
 
      def counter_bag_params

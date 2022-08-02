@@ -1,6 +1,6 @@
 import React from 'react'
 import { Image, Transformation } from 'cloudinary-react'
-import { requestState, requestBagState, counterOfferState, counterOfferBagState, currentUserState, dealState } from '../recoil/atoms'
+import { requestState, requestBagState, requestArrayState, counterOfferState, counterOfferBagState, currentUserState, dealState } from '../recoil/atoms'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { useNavigate } from 'react-router-dom'
 import api from '../api/posts'
@@ -13,7 +13,7 @@ function ItemCard({ item }) {
     const [requestBag, setRequestBag] = useRecoilState(requestBagState)
     const [counterOffer, setCounterOffer] = useRecoilState(counterOfferState)
     const [deal, setDeal] = useRecoilState(dealState)
-
+    const [requestArray, setRequestArray] = useRecoilState(requestArrayState)
 
 
 
@@ -27,12 +27,26 @@ function ItemCard({ item }) {
         try {
             const requestResp = await api.post('request', newRequest)
             setRequest(requestResp.data)
-//            setRequestBag([...requestBag, item])
             setRequestBag([item])
 
         } catch(error) {
             console.log(`Error: ${error.message}`)
         }
+
+        const requestItem = {
+            request_id: request.id,
+            bag_id: item.id,
+            request_quantity: 0
+        }
+    
+        try{
+            const response = await api.post('request-bag', requestItem)
+            setRequestArray([...requestArray, response.data])
+
+        } catch (error) {
+            console.log(`Error: ${error.message}`)
+        }
+
         const newCounterOffer = {
             user_id: item.user_id
         }

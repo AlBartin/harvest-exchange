@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :request_bags
   resources :bags
   resources :users
-  
+
+
   post 'signup', to: 'users#create'
   get 'users', to: 'users#index'
   get 'counter-user/:id', to: 'users#show'

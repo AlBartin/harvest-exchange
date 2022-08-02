@@ -6,7 +6,7 @@ import api from '../api/posts'
 
 
 
-function OfferItemCard({ item }) {
+function OfferItemCard({ item, counterBagId, requestBagId }) {
 
     const currentUser = useRecoilValue(currentUserState)
     
@@ -21,10 +21,16 @@ function OfferItemCard({ item }) {
 
     const [newQuantity, setNewQuantity] = useState(0)
     const [editButton, setEditButton] = useState(false)
+    const [quantityButton, setQuantityButton] = useState(false)
 
-    // const handleShowQuantity = () => {
-    //     setQuantityButton(quantityButton => !quantityButton)
-    //   }
+    console.log(counterBagId)
+    console.log(requestBagId)
+
+    console.log(currentUser.id)
+
+    const handleShowQuantity = () => {
+        setQuantityButton(quantityButton => !quantityButton)
+      }
 
       const handleSetQuantity = (e) => {
         console.log(e.target.value)
@@ -48,7 +54,7 @@ function OfferItemCard({ item }) {
         console.log(`Error: ${error.message}`)
       }
           //setRequestArray([...requestArray, requestItem])
-      }
+    }
       
       const handleSetOffer = async (e) => {
         e.preventDefault()
@@ -69,6 +75,28 @@ function OfferItemCard({ item }) {
           //setCounterArray([...counterArray, offerItem])
       }
 
+      const handleDeleteRequest = async () => {
+        try {
+            await api.delete(`request-bag/${requestBagId}`)
+            const requestList = requestBag.filter(request => request.id !== requestBagId)
+            setRequestArray(requestList)
+        }
+        catch(error) {
+            console.log(`Error: ${error.message}`)
+        }
+      }
+
+      const handleDeleteCounter = async () => {
+        try {
+            await api.delete(`counter-bag/${counterBagId}`)
+            const counterList = counterArray.filter(counter => counter.id !== counterBagId)
+            setCounterArray(counterList)    
+        }
+        catch(error) {
+            console.log(`Error: ${error.message}`)
+        }
+      }
+
     return (
         <div className="card">
             <Image cloudName={'chenkhov'} publicId={item.image_url} alt={item.item_name}>
@@ -78,7 +106,50 @@ function OfferItemCard({ item }) {
             <h2 name={item.id}> {item.item_name}</h2>
             <p>Description: {item.descriptions}</p>
             <p>Available Quantity: {item.quantity} {item.measurement_units}</p>
-            <div>
+            <p> Requested Quantity: {newQuantity}</p>
+            {editButton ? 
+                <div>
+                {currentUser.id === item.user_id ? 
+                    <div>
+                    {item.quantity > 0 ?  
+                        <div>
+                            <form onSubmit={handleSetOffer}>
+                            {newQuantity > 1 ? <button type='button' onClick={()=>setNewQuantity(newQuantity-1)}>-</button>
+                            :<button>-</button>}
+                            <input type="integer"  placeholder={newQuantity} value={newQuantity} onChange={handleSetQuantity}/>
+                            {newQuantity < item.quantity ? <button type='button' onClick={()=>setNewQuantity(newQuantity+1)}>+</button> 
+                            : <button>+</button>}
+                            <input type='submit' value='Set Offer Items'/>
+                            </form>
+                            <button onClick={handleDeleteRequest}>Remove {item.id} from Request</button>
+                        </div>
+                    :
+                    <p>Looks like you have run out of {item.item_name}</p>}
+                    </div>
+                    :
+                    <div>           
+                    {item.quantity > 0 ?
+                        <div>
+                            <form onSubmit={handleSetRequest}>
+                            {newQuantity > 1 ? <button type='button' onClick={()=>setNewQuantity(newQuantity-1)}>-</button>
+                            :<button>-</button>}
+                            <input type="integer" placeholder={newQuantity} name="newQuantity" value={newQuantity} onChange={handleSetQuantity}/>
+                            {newQuantity < item.quantity ? <button type='button' onClick={()=>setNewQuantity(newQuantity+1)}>+</button>
+                            : <button>+</button>}
+                            <input type='submit' value='Set Request Item'/>
+                            </form>
+                            <button onClick={handleDeleteCounter}>Remove Item from Offer</button>
+                        </div>
+                        : 
+                            <p>Looks like {counter.user} has run out of {item.item_name}</p>
+                        }
+                    </div>}
+                </div>
+                :
+                <button onClick={() => setEditButton(true)}>Edit Quantity</button>
+            }
+            
+            {/* <div>
             {currentUser.id === item.user_id ? 
                 <div>
                 {item.quantity > 0 ?  
@@ -112,7 +183,7 @@ function OfferItemCard({ item }) {
                         <p>Looks like {counter.user} has run out of {item.item_name}</p>
                     }
                 </div>}
-            </div>
+            </div> */}
             
             </div>
     </div>

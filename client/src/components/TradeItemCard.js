@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useRecoilValue, useRecoilState } from 'recoil'
-import { currentUserState, counterOfferState, counterOfferBagState, requestState, requestBagState } from '../recoil/atoms'
+import { currentUserState, counterOfferState, counterOfferBagState, counterArrayState, requestState, requestBagState, requestArrayState } from '../recoil/atoms'
 import { Image, Transformation } from 'cloudinary-react'
 import api from '../api/posts'
 
@@ -9,35 +9,42 @@ function TradeItemCard({ item }) {
   const currentUser = useRecoilValue(currentUserState)
   const counter = useRecoilValue(counterOfferState)
   const [counterBag, setCounterBag] = useRecoilState(counterOfferBagState)
+  const [counterArray, setCounterArray] = useRecoilState(counterArrayState)
+    
   const request = useRecoilValue(requestState)
   const [requestBag, setRequestBag] = useRecoilState(requestBagState)
+  const [requestArray, setRequestArray] = useRecoilState(requestArrayState)
 
-  const [quantity, setQuantity] = useState(0)
 
-  console.log(request.id)
-  console.log(item.id)
-  console.log(quantity)
-  console.log(requestBag)
+  const handleRequestBag = async () => {
+    setRequestBag([...requestBag, item])
+    const requestItem = {
+      request_id: request.id,
+      bag_id: item.id,
+      request_quantity: 0
+    }
+      console.log(requestItem)
 
-  const handleRequestBag = () => {
-    setRequestBag([...requestBag, item])  
+    try{
+      const response = await api.post('request-bag', requestItem)
+      setRequestArray([...requestArray, response.data])
+    } catch (error) {
+      console.log(`Error: ${error.message}`)
+    }
   }
   
-  const handleOfferBag = () => {
+  const handleOfferBag = async () => {
     setCounterBag([...counterBag, item])
-  }
-
-  const handleOfferSubmit = async (e) => {
-    e.preventDefault()
     const offerItem = {
       counter_id: counter.id,
       bag_id: item.id,
-      request_quantity: quantity,
+      counter_quantity: 0
     }
-   try{
+    console.log(offerItem)
+    try{
       const response = await api.post('counter-bag', offerItem)
-      setCounterBag([...counterBag, response.data.bag])
-      console.log(response.data.bag)
+      //setCounterBag([response.data.bag])
+      setCounterArray([...counterArray, response.data])
     } catch (error) {
       console.log(`Error: ${error.message}`)
     }

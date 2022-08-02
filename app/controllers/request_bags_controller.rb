@@ -5,6 +5,11 @@ class RequestBagsController < ApplicationController
         render json: new_request_bag, status: :created
      end
 
+     def destroy
+      request = RequestBag.find(params[:id])
+      request.destroy
+      end
+
      private
 
      def request_bag_params

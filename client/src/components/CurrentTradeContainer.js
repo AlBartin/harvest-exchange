@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { requestState, requestBagState, requestArrayState, counterOfferBagState, counterOfferState, counterArrayState, currentUserState } from '../recoil/atoms'
-import { useResetRecoilState, useRecoilValue } from 'recoil'
+import { dealState, requestState, requestBagState, requestArrayState, counterOfferBagState, counterOfferState, counterArrayState, currentUserState } from '../recoil/atoms'
+import { useResetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
 import { Image, Transformation } from 'cloudinary-react'
 import TradeItemCard from './TradeItemCard'
 import OfferItemCard from './OfferItemCard'
@@ -24,14 +24,18 @@ function CurrentTradeContainer() {
     const resetCounterArray = useResetRecoilState(counterArrayState)
     const counterArray = useRecoilValue(counterArrayState)
 
+    const [deal, setDeal] = useRecoilState(dealState)
+
     //const [counterUserItemsArray, setCounterUserItemsArray] = useState('')
     // const [counterUser, setCounterUser] = useRecoilState(counterOfferUserState)
     
     console.log(request)
     console.log(requestBag)
+    console.log(requestArray)
     console.log(request.user.all_bags)
     console.log(counter)
     console.log(counterBag)
+    console.log(counterArray)
 
     const handleDealSubmit = async (e) => {
       e.preventDefault()
@@ -45,7 +49,8 @@ function CurrentTradeContainer() {
 
       try{
           const response = await api.post('deal', deal)
-          console.log(response.data)
+          setDeal(response.data)
+          console.log(deal)
         } catch (error) {
           console.log(`Error: ${error.message}`)
         }
@@ -54,11 +59,10 @@ function CurrentTradeContainer() {
   const displayCurrentUserItems = userItemsArray.map((product) => <TradeItemCard key={product.id} item={product} />)
   const displayCounterUserItems = counterUserItemsArray.map((product) => <TradeItemCard key={product.id} item={product} />)
 
-  const displayRequestedItems = requestBag.map((product) => <OfferItemCard key={product.id} item={product}/>)
+  const displayRequestedItems = requestBag.map((product) => <OfferItemCard key={product.id} item={product} requestBagId={product.user_id}/>)
 
   return (
     <div>
-      {/* <Prompt when={shouldBlockNavigation} */}
         <div>
             <Image cloudName={'chenkhov'} publicId={currentUser.avatar_url} alt={currentUser.username}>
                 <Transformation height = "200" width="200" crop="fill" gravity="face"/>
@@ -72,9 +76,10 @@ function CurrentTradeContainer() {
 
         <div>
           <h4>Current Items Offered In This Trade: </h4>
-          {counterBag ? counterBag.map((product) => <OfferItemCard key={product.id} item={product} />)
+          {counterArray.length == 0 ? <h4>No Items Currently in Offer</h4>
           :
-          <h4>No Items Currently in Offer</h4>}
+          counterArray.map((product) => <OfferItemCard key={product.id} item={product.bag} counterBagId={product.id}/>)
+          }
         </div>
 
         <div>
