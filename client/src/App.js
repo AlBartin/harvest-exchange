@@ -10,6 +10,7 @@ import AddItem from "./components/AddItem";
 import Logout from "./components/Logout";
 import ItemsContainer from "./components/ItemsContainer"
 import CurrentTradeContainer from './components/CurrentTradeContainer'
+import ErrorPage from './components/ErrorPage'
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/all-items" element={<ItemsContainer />} />
         <Route path="/current-trades" element={<CurrentTradeContainer />} />
-        
+        <Route path='*' element={<ErrorPage />} />
       </Routes>
     </Router>
   )

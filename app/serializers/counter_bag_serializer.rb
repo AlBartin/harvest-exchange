@@ -1,5 +1,5 @@
 class CounterBagSerializer < ActiveModel::Serializer
-  attributes :id, :item_name, :quantity, :measurement_units
+  attributes :id, :counter_id, :bag_id, :counter_quantity
   has_one :counter
   has_one :bag
 end

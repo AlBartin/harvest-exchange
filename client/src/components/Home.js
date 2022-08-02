@@ -30,8 +30,8 @@ function Home() {
     const displayItems = items.slice(0,6).map((item) => <ItemCard key={item.id} item={item}/> )
 
   return (
-    <div>
-        <div>
+    <div className="home-container">
+        <div className="mission-container">
             <h2>
                 Mission Statement
             </h2>
@@ -39,14 +39,16 @@ function Home() {
                 Harvest Exchange prides itself in connecting home growers who are leading and teaching members of their communities responsibly sustainable and organic gardening.
             </p>
         </div>
-        <div>
+        <div className="current-items-container">
             <h2>
                 See what people are currently trading!
             </h2>
-            <div>
+            <div className = "listed-items-container">
                 {displayItems}
+            </div>
+            <div className="current-items-container-button">
                 <Link to='/all-items' id="browse" style={{ textDecoration: 'none' }}>
-                <button>Browse More</button>
+                <button className="browse-more-button">Browse More</button>
                 </Link>
             </div>
         </div>

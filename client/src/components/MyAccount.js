@@ -1,19 +1,42 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { currentUserState, userBasketState } from '../recoil/atoms'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useRecoilState } from 'recoil'
 import { Image, Transformation } from 'cloudinary-react'
 import ItemCard from './ItemCard'
 // import { Axios } from 'axios'
+import api from '../api/posts'
 
 
 
 function MyAccount () {
     const currentUser = useRecoilValue(currentUserState)
-    const {username, email, avatar_url, street_address, city_address, state_address, zipcode} = currentUser
-    const userBasket = useRecoilValue(userBasketState)
+    const {id, username, email, avatar_url, street_address, city_address, state_address, zipcode, all_bags} = currentUser
+    const [userItemsArray, setUserItemsArray] = useRecoilState(userBasketState)
+
+
+    useEffect(() => {
+
+      const getItems = async () => {
+        try{
+      const response = await api.get(`users/${id}`)
+      setUserItemsArray(response.data.all_bags)
+        }
+        catch (error) {
+          console.log(`Error: ${error.message}`)
+        }
+    }
+  getItems();
+  }, [])
+    const userItems = userItemsArray.map((product) => <ItemCard key={product.id} item={product} />)
     
-    const userItems = userBasket.map((product) => <ItemCard key={product.id} item={product} />)
+    console.log(currentUser)
     
+    //**************THIS WORKS*********** */
+    // const userBasket = useRecoilValue(userBasketState)
+    // const userItems = userBasket.map((product) => <ItemCard key={product.id} item={product} />)
+    
+
+
     return (
         <div>
           <div>

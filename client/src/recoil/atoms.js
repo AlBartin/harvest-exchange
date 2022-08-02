@@ -57,6 +57,11 @@ export const requestBagState = atom({
     default: []
 })
 
+export const requestArrayState = atom({
+    key: 'requestArrayState',
+    default: []
+})
+
 export const counterOfferState = atom({
     key: 'counterOfferState',
     default: ''
@@ -64,12 +69,7 @@ export const counterOfferState = atom({
 
 export const counterOfferBagState = atom({
     key: 'counterOfferBagState',
-    default: null
-        // counter_id: '',
-        // bag_id: '',
-        // item_name: '',
-        // quantity: '',
-        // measurement_units: ''
+    default: []
 })
 
 export const counterOfferUserState = atom({
@@ -77,12 +77,14 @@ export const counterOfferUserState = atom({
     default: []
 })
 
+export const counterArrayState = atom({
+    key: 'counterArrayState',
+    default: []
+})
+
 export const dealState = atom({
     key: 'dealState',
-    default: {
-        request_finalized: false,
-        counter_finalized: false
-    }
+    default: {}
 })
 
 export const userBasketState = atom({

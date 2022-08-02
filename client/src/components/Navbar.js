@@ -7,30 +7,31 @@ function Navbar() {
     const currentUser = useRecoilValue(currentUserState)
 
     return (
-        <header>
-        <nav className="Navbar">
-            <NavLink to= '/' className='nav-links'>Home</NavLink>
-            <NavLink to="/all-items" className="nav-links">All Products</NavLink>
-            <NavLink to="/events" className="nav-links">Events</NavLink>
-            <NavLink to="/users" className="nav-links">Users</NavLink>
-            {currentUser ? <NavLink to="/current-trades" className="nav-links">Trades In Progress</NavLink>
-            :
-            null}
-            { currentUser ? <NavLink to="/add-item" className="nav-links">Add Items</NavLink>
-            :
-            null}
-            { currentUser ? <NavLink to="/my-profile" className="nav-links">My Profile</NavLink>
-            :
-            <NavLink to="/signup" className="nav-links">Register</NavLink>
-            }
-            { currentUser ?
-		    <NavLink to="/logout" className="nav-links">Logout</NavLink>
-		    : 
-		    <NavLink to="/login" className="nav-links">Login</NavLink>
-            }
-        </nav>
-        </header>
-
+        <div>
+            <header className="header-img">
+            </header>
+            <nav className="Navbar">
+                <NavLink to= '/' className='nav-links'>Home</NavLink>
+                <NavLink to="/all-items" className="nav-links">All Products</NavLink>
+                <NavLink to="/events" className="nav-links">Events</NavLink>
+                <NavLink to="/users" className="nav-links">Users</NavLink>
+                {currentUser ? <NavLink to="/current-trades" className="nav-links">Trades In Progress</NavLink>
+                :
+                null}
+                { currentUser ? <NavLink to="/add-item" className="nav-links">Add Items</NavLink>
+                :
+                null}
+                { currentUser ? <NavLink to="/my-profile" className="nav-links">My Profile</NavLink>
+                :
+                <NavLink to="/signup" className="nav-links">Register</NavLink>
+                }
+                { currentUser ?
+                <NavLink to="/logout" className="nav-links">Logout</NavLink>
+                : 
+                <NavLink to="/login" className="nav-links">Login</NavLink>
+                }
+            </nav>
+        </div>
     )
 }
 

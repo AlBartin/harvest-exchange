@@ -32,7 +32,7 @@ const items = useRecoilValue(itemState)
 const displayItems = items.map((item) => <ItemCard key={item.id} item={item}/> )
 
   return (
-    <div>{displayItems}</div>
+    <div className="all-items-container">{displayItems}</div>
   )
 }
 

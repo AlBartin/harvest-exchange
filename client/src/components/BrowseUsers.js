@@ -42,7 +42,7 @@ function BrowseUsers () {
     const displayUsers = users.map((user) => <UserCard key={user.id} user={user}/> )
 
     return (
-        <div>
+        <div className="all-users-container">
           { displayUsers }
         </div>
     )

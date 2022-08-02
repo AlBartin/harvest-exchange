@@ -14,22 +14,7 @@ function ItemCard({ item }) {
     const [counterOffer, setCounterOffer] = useRecoilState(counterOfferState)
     const [deal, setDeal] = useRecoilState(dealState)
 
-        // const handleDeal = async () => {
-        //     const newDeal = {
-        //         ...deal,
-        //         request_id: request.id,
-        //         request_finalized: false,
-        //         counter_finalized: false
-        //     }
-        //     try {
-        //         const dealResp = await api.post('deal', newDeal)
-        //         setDeal(dealResp.data)
-        //         navigate('/current-trades')
-        //     } catch(error) {
-        //         console.log(`Error: ${error.message}`)
-        //     }
-        //     console.log(deal)
-        // }
+
 
 
 
@@ -42,13 +27,9 @@ function ItemCard({ item }) {
         try {
             const requestResp = await api.post('request', newRequest)
             setRequest(requestResp.data)
-            setRequestBag([...requestBag, item])
-            //setRequestUserId(requestResp.user_id)
-            // console.log(requestResp.data)
-            // console.log(requestResp.data.id)
-            // const requestID = {request_id: requestResp.data.id}
-            // setDeal({...deal, ...requestID})
-            // console.log(deal)
+//            setRequestBag([...requestBag, item])
+            setRequestBag([item])
+
         } catch(error) {
             console.log(`Error: ${error.message}`)
         }
@@ -86,23 +67,48 @@ function ItemCard({ item }) {
     }
 
     return (
-    <div>
         <div className="card">
             <Image cloudName={'chenkhov'} publicId={item.image_url} alt={item.item_name}>
                 <Transformation aspectRatio="1:1" background="#ffffff" border="0px_solid_rgb:ffffff" gravity="auto" width="175" crop="fill" />
             </Image>
-        <div className="container">
-        <h2 name={item.id}> {item.item_name}</h2>
-        <p>Description: {item.descriptions}</p>
-        <p>Quantity: {item.quantity} {item.measurement_units}</p>
-        {currentUser ? 
-        <p><button className="item-button" onClick={handleRequest}>Initiate Trade</button></p>
-        : null}
-
+            <div className="container">
+                <h2 name={item.id}> {item.item_name}</h2>
+                <p>Description: {item.descriptions}</p>
+                <p>Quantity: {item.quantity} {item.measurement_units}</p>
+                {currentUser && currentUser.id != item.user_id ? 
+                <p><button className="item-button" onClick={handleRequest}>Initiate Trade</button></p>
+                : null}
+            </div>
         </div>
-    </div>
-    </div>
   )
 }
 
 export default ItemCard
+
+
+        // const handleDeal = async () => {
+        //     const newDeal = {
+        //         ...deal,
+        //         request_id: request.id,
+        //         request_finalized: false,
+        //         counter_finalized: false
+        //     }
+        //     try {
+        //         const dealResp = await api.post('deal', newDeal)
+        //         setDeal(dealResp.data)
+        //         navigate('/current-trades')
+        //     } catch(error) {
+        //         console.log(`Error: ${error.message}`)
+        //     }
+        //     console.log(deal)
+        // }
+
+
+
+
+                    //setRequestUserId(requestResp.user_id)
+            // console.log(requestResp.data)
+            // console.log(requestResp.data.id)
+            // const requestID = {request_id: requestResp.data.id}
+            // setDeal({...deal, ...requestID})
+            // console.log(deal)

@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   post 'request', to: 'requests#create'
   delete 'request/:id', to: 'requests#destroy'
 
+  post 'request-bag', to: 'request_bags#create'
+  delete 'request-bag/:id', to: 'request_bags#destroy'
+
   post 'counter', to: 'counters#create'
   delete 'counter/:id', to: 'counter#destroy'
 
