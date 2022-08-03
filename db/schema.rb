@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_22_065312) do
+ActiveRecord::Schema.define(version: 2022_08_03_131538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(version: 2022_07_22_065312) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["counter_id"], name: "index_deals_on_counter_id"
     t.index ["request_id"], name: "index_deals_on_request_id"
+  end
+
+  create_table "poly_deals", force: :cascade do |t|
+    t.boolean "request_finalized"
+    t.boolean "counter_finalized"
+    t.string "dealable_type", null: false
+    t.bigint "dealable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["dealable_type", "dealable_id"], name: "index_poly_deals_on_dealable"
   end
 
   create_table "request_bags", force: :cascade do |t|

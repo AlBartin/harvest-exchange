@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import UserCard from './UserCard'
 import api from '../api/posts'
 
@@ -9,25 +9,28 @@ import { usersState } from '../recoil/atoms'
 
 function BrowseUsers () {
 
-    const [users, setUsers] = useRecoilState(usersState)
+    const users = useRecoilValue(usersState)
 
-    useEffect(() => {
-    const fetchUsers = async () => {
-        try {
-            const response = await api.get('/users')
-            setUsers(response.data)
-        } catch (error) {
-            if (error.response) {
-                console.log(error.response.data)
-                console.log(error.response.status)
-                console.log(error.response.headers)
-            } else {
-                console.log(`Error: ${error.message}`)
-            }
-        }
-    }
-    fetchUsers();
-},[])
+    console.log(users)
+//     const [users, setUsers] = useRecoilState(usersState)
+
+//     useEffect(() => {
+//     const fetchUsers = async () => {
+//         try {
+//             const response = await api.get('/users')
+//             setUsers(response.data)
+//         } catch (error) {
+//             if (error.response) {
+//                 console.log(error.response.data)
+//                 console.log(error.response.status)
+//                 console.log(error.response.headers)
+//             } else {
+//                 console.log(`Error: ${error.message}`)
+//             }
+//         }
+//     }
+//     fetchUsers();
+// },[])
 
 
     // useEffect (() => {

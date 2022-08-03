@@ -4,8 +4,18 @@ class User < ApplicationRecord
     has_many :counters
     has_many :request_bags, through: :requests
     has_many :counter_bags, through: :counters
-    has_many :deals, through: :requests
-    has_many :deals, through: :counters
+    #has_many :poly_deals, as: :dealable
+    # has_many :poly_deals, -> (user) {
+    #   unscope(where: :user_id).
+    #   where(dealable: [user.requests, user.counters])
+    # }
+    #has_many :deals, through: :requests
+    # has_many :deals, through: :counters
+    has_many :deals, ->(user) {
+      unscope(where: :user_id).
+      left_joins(:request, :counter).
+      where('requests.user_id = ? OR counters.user_id = ?', user.id, user.id)
+    }
 
     has_secure_password
 
@@ -29,6 +39,12 @@ class User < ApplicationRecord
         self.deals.all
       end
 
+      def all_request_bags
+        self.request_bags.all
+      end
 
+      def all_counter_bags
+        self.counter_bags.all
+      end
 
 end

@@ -36,7 +36,8 @@ const Login = () => {
         setCurrentUser(response.data)
         setUserBasket(response.data.all_bags)
         localStorage.setItem('user', JSON.stringify(response.data))
-        navigate('/my-profile', { replace: true })
+        localStorage.setItem('userBasket', JSON.stringify(response.data.all_bags))
+        navigate('/', { replace: true })
         }
         catch(err) {
             if (!err?.response) {

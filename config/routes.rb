@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :poly_deals
   resources :deals
   resources :counters
   resources :counter_bags
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   get 'all-items', to: 'bags#index'
+  get 'bag/:id', to: 'bags#show'
   post 'add-item', to: 'bags#create'
 
   post 'request', to: 'requests#create'
@@ -31,5 +33,7 @@ Rails.application.routes.draw do
   delete 'counter-bag/:id', to: 'counter_bags#destroy'
 
   post 'deal', to: 'deals#create'
+
+  post 'poly-deal', to: 'poly_deals#create'
   
 end
