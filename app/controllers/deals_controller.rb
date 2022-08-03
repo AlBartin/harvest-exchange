@@ -1,5 +1,9 @@
 class DealsController < ApplicationController
 
+   def index
+      render json: Deal.all
+   end
+
     def create
         new_deal = Deal.create!(deal_params)
         render json: new_deal, status: :created

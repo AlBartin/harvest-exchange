@@ -4,15 +4,18 @@ import { useResetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
 import { Image, Transformation } from 'cloudinary-react'
 import TradeItemCard from './TradeItemCard'
 import OfferItemCard from './OfferItemCard'
+import { useNavigate } from 'react-router-dom'
 import api from '../api/posts'
 
 function CurrentTradeContainer() {
+
+    const navigate = useNavigate()
 
     const currentUser = useRecoilValue(currentUserState)
     const request = useRecoilValue(requestState)
     const requestBag = useRecoilValue(requestBagState)
     const userItemsArray = request.user.all_bags
-    const resetRequestArray = useResetRecoilState(requestArrayState)
+    const resetRequestBag = useResetRecoilState(requestBagState)
     const requestArray = useRecoilValue(requestArrayState)
 
     console.log(userItemsArray)
@@ -21,10 +24,11 @@ function CurrentTradeContainer() {
     const counterUser = counter.user
     const counterUserItemsArray = counterUser.all_bags
     const counterBag = useRecoilValue(counterOfferBagState)
-    const resetCounterArray = useResetRecoilState(counterArrayState)
+    const resetCounterBag = useResetRecoilState(counterOfferBagState)
     const counterArray = useRecoilValue(counterArrayState)
 
     const [deal, setDeal] = useRecoilState(dealState)
+    const resetDeal = useResetRecoilState(dealState)
 
     //const [counterUserItemsArray, setCounterUserItemsArray] = useState('')
     // const [counterUser, setCounterUser] = useRecoilState(counterOfferUserState)
@@ -56,6 +60,13 @@ function CurrentTradeContainer() {
         }
     }
 
+    const handleDealDelete = () => {
+      resetCounterBag()
+      resetRequestBag()
+      resetDeal()
+      navigate('/')
+    }
+
   const displayCurrentUserItems = userItemsArray.map((product) => <TradeItemCard key={product.id} item={product} />)
   const displayCounterUserItems = counterUserItemsArray.map((product) => <TradeItemCard key={product.id} item={product} />)
 
@@ -71,14 +82,17 @@ function CurrentTradeContainer() {
         </div>
         <div>
           <h4>Current Items Requested In This Trade: </h4>
-          {displayRequestedItems}
+          {requestBag.length == 0 ? <h4>No Items Currently Requested</h4>
+          :
+          requestBag.map((product) => <OfferItemCard key={product.id} item={product} requestBagId={product.user_id}/>)
+          }
         </div>
 
         <div>
           <h4>Current Items Offered In This Trade: </h4>
-          {counterArray.length == 0 ? <h4>No Items Currently in Offer</h4>
+          {counterBag.length == 0 ? <h4>No Items Currently in Offer</h4>
           :
-          counterArray.map((product) => <OfferItemCard key={product.id} item={product.bag} counterBagId={product.id}/>)
+          counterBag.map((product) => <OfferItemCard key={product.id} item={product} counterBagId={product.user_id}/>)
           }
         </div>
 
@@ -95,6 +109,7 @@ function CurrentTradeContainer() {
           {displayCounterUserItems}
         </div>
         <button onClick={handleDealSubmit}>Request Trade</button>
+        <button onClick={handleDealDelete}>Cancel Trade</button>
     </div>
   )
 }

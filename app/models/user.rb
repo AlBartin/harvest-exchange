@@ -2,8 +2,8 @@ class User < ApplicationRecord
     has_many :bags
     has_many :requests
     has_many :counters
-    has_many :request_bags, through: :bags
-    has_many :counter_bags, through: :bags
+    has_many :request_bags, through: :requests
+    has_many :counter_bags, through: :counters
     has_many :deals, through: :requests
     has_many :deals, through: :counters
 
@@ -23,6 +23,10 @@ class User < ApplicationRecord
 
       def all_counters
         self.counters.all
+      end
+
+      def all_deals
+        self.deals.all
       end
 
 

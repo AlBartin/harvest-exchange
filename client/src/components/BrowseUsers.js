@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import UserCard from './UserCard'
-import axios from 'axios'
 import api from '../api/posts'
 
 

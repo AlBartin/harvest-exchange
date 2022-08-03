@@ -13,20 +13,26 @@ function OfferItemCard({ item, counterBagId, requestBagId }) {
     const counter = useRecoilValue(counterOfferState)
     const [counterBag, setCounterBag] = useRecoilState(counterOfferBagState)
     const [counterArray, setCounterArray] = useRecoilState(counterArrayState)
-    
+    const [counterItem, setCounterItem] = useState({})
+
     const request = useRecoilValue(requestState)
     const [requestBag, setRequestBag] = useRecoilState(requestBagState)
     const [requestArray, setRequestArray] = useRecoilState(requestArrayState)
-
+    const [requestItem, setRequestItem] = useState({})
 
     const [newQuantity, setNewQuantity] = useState(0)
     const [editButton, setEditButton] = useState(false)
     const [quantityButton, setQuantityButton] = useState(false)
 
-    console.log(counterBagId)
-    console.log(requestBagId)
+    // console.log(counterBagId)
+    // console.log(requestBagId)
+    //console.log(currentUser)
+    // console.log(counter.user.id)
+    // console.log(request.user.id)
+    console.log(item)
 
-    console.log(currentUser.id)
+     console.log(requestBag)
+     console.log(counterBag)
 
     const handleShowQuantity = () => {
         setQuantityButton(quantityButton => !quantityButton)
@@ -49,6 +55,7 @@ function OfferItemCard({ item, counterBagId, requestBagId }) {
       try{
         const response = await api.post('request-bag', requestItem)
         console.log(response.data)
+        setRequestItem(response.data)
         setEditButton(editButton => ! editButton)
       } catch (error) {
         console.log(`Error: ${error.message}`)
@@ -68,6 +75,8 @@ function OfferItemCard({ item, counterBagId, requestBagId }) {
             const response = await api.post('counter-bag', offerItem)
             //setCounterBag([response.data.bag])
             console.log(response.data)
+            setCounterItem(response.data)
+            setCounterArray([...counterArray, response.data])
             setEditButton(editButton => ! editButton)
           } catch (error) {
             console.log(`Error: ${error.message}`)
@@ -77,9 +86,9 @@ function OfferItemCard({ item, counterBagId, requestBagId }) {
 
       const handleDeleteRequest = async () => {
         try {
-            await api.delete(`request-bag/${requestBagId}`)
-            const requestList = requestBag.filter(request => request.id !== requestBagId)
-            setRequestArray(requestList)
+            await api.delete(`request-bag/${requestItem.id}`)
+            const requestList = requestBag.filter(request => request.id !== item.id)
+            setRequestBag(requestList)
         }
         catch(error) {
             console.log(`Error: ${error.message}`)
@@ -88,9 +97,9 @@ function OfferItemCard({ item, counterBagId, requestBagId }) {
 
       const handleDeleteCounter = async () => {
         try {
-            await api.delete(`counter-bag/${counterBagId}`)
-            const counterList = counterArray.filter(counter => counter.id !== counterBagId)
-            setCounterArray(counterList)    
+            await api.delete(`counter-bag/${counterItem.id}`)
+            const counterList = counterBag.filter(counter => counter.id !== item.id)
+            setCounterBag(counterList)    
         }
         catch(error) {
             console.log(`Error: ${error.message}`)
@@ -109,7 +118,7 @@ function OfferItemCard({ item, counterBagId, requestBagId }) {
             <p> Requested Quantity: {newQuantity}</p>
             {editButton ? 
                 <div>
-                {currentUser.id === item.user_id ? 
+                {currentUser.id == item.user_id ? 
                     <div>
                     {item.quantity > 0 ?  
                         <div>
@@ -121,7 +130,7 @@ function OfferItemCard({ item, counterBagId, requestBagId }) {
                             : <button>+</button>}
                             <input type='submit' value='Set Offer Items'/>
                             </form>
-                            <button onClick={handleDeleteRequest}>Remove {item.id} from Request</button>
+                            <button onClick={handleDeleteCounter}>Remove {item.item_name} from Offer</button>
                         </div>
                     :
                     <p>Looks like you have run out of {item.item_name}</p>}
@@ -138,7 +147,7 @@ function OfferItemCard({ item, counterBagId, requestBagId }) {
                             : <button>+</button>}
                             <input type='submit' value='Set Request Item'/>
                             </form>
-                            <button onClick={handleDeleteCounter}>Remove Item from Offer</button>
+                            <button onClick={handleDeleteRequest}>Remove {item.item_name} from Request</button>
                         </div>
                         : 
                             <p>Looks like {counter.user} has run out of {item.item_name}</p>
