@@ -4,6 +4,8 @@ class CreateRequestBags < ActiveRecord::Migration[6.1]
       t.references :request, null: false, foreign_key: true
       t.references :bag, null: false, foreign_key: true
       t.integer :request_quantity
+      t.string :item_name
+      t.string :image_url
 
       t.timestamps
     end

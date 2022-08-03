@@ -12,6 +12,6 @@ class CounterBagsController < ApplicationController
      private
 
      def counter_bag_params
-        params.permit(:counter_id, :bag_id, :counter_quantity)
+        params.permit(:counter_id, :bag_id, :counter_quantity, :item_name, :image_url)
      end
 end

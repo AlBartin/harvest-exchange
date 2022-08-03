@@ -36,7 +36,9 @@ function ItemCard({ item }) {
         const requestItem = {
             request_id: request.id,
             bag_id: item.id,
-            request_quantity: 0
+            request_quantity: 0,
+            item_name: item.item_name,
+            image_url: item.image_url
         }
     
         try{

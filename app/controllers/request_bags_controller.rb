@@ -13,6 +13,6 @@ class RequestBagsController < ApplicationController
      private
 
      def request_bag_params
-        params.permit(:request_id, :bag_id, :request_quantity)
+        params.permit(:request_id, :bag_id, :request_quantity, :item_name, :image_url)
      end
 end

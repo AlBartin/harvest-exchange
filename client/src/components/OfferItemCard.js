@@ -48,7 +48,9 @@ function OfferItemCard({ item, counterBagId, requestBagId }) {
         const requestItem = {
             request_id: request.id,
             bag_id: item.id,
-            request_quantity: newQuantity
+            request_quantity: newQuantity,
+            item_name: item.item_name,
+            image_url: item.image_url
           }
           console.log(requestItem)
 
@@ -68,7 +70,9 @@ function OfferItemCard({ item, counterBagId, requestBagId }) {
         const offerItem = {
             counter_id: counter.id,
             bag_id: item.id,
-            counter_quantity: newQuantity
+            counter_quantity: newQuantity,
+            item_name: item.item_name,
+            image_url: item.image_url
           }
           console.log(offerItem)
           try{
