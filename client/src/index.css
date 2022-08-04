@@ -55,6 +55,7 @@
   min-height: 75vh;
   align-self: left;
   max-width: 30vh;
+  align-items: center;
 }
 
 .current-items-container {
@@ -151,4 +152,43 @@ user-button:hover, a:hover {
 .all-users-container {
   display: flex;
   flex-wrap: wrap;
+}
+
+.item-card-button {
+  display: flex;
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: rgb(34, 58, 20);
+  text-align: center;
+  cursor: pointer;
+  width: 9vw;
+  font-size: 18px;
+}
+
+.logout-button {
+  display: flex;
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: rgb(34, 58, 20);
+  text-align: center;
+  cursor: pointer;
+  width: 12vw;
+  font-size: 18px;
+}
+
+.logout-form {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  min-width: 300px;
+  min-height: 200px;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  padding: 1rem;
 }

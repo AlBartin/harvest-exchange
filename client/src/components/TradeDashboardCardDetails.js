@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { Image, Transformation } from 'cloudinary-react'
 
- function AllTradesItemCard({ request, counter }) {
+ function TradeDashboardCardDetails({ request, counter }) {
 
     console.log(request)
-console.log(counter)
-
 
   return (
     <div>
@@ -24,6 +22,7 @@ console.log(counter)
             <Transformation aspectRatio="1:1" background="#ffffff" border="0px_solid_rgb:ffffff" gravity="auto" radius="max" width="150" crop="fill"/>
         </Image>
         <h3>{counter.item_name}</h3>
+        <h4>{counter.request_quantity}</h4>
     </div>
     :
     null
@@ -33,4 +32,4 @@ console.log(counter)
   )
 }
 
-export default AllTradesItemCard
+export default TradeDashboardCardDetails

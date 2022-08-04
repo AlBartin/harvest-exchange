@@ -19,19 +19,11 @@ function Logout() {
         navigate('/')
         } catch (error) {console.log(error)}
     }
-
-  // const handleLogout = () => {
-  //   api.delete('/logout')
-  //   .then({resetCurrentUser()
-  //   localStorage.removeItem('user')
-  //   navigate('/')})
-  //   .catch(error) {console.log(error)}
-  // }
-
   return (
-    <div>Are you sure you want to log out?
-        <button onClick={handleLogout}>Log out</button>
-        <button>No, I'm not done</button>
+    <div className="logout-form">
+      <h2>Are you sure you want to log out?</h2>
+        <button className="logout-button" onClick={handleLogout}>Log out</button>&nbsp;
+        <button className="logout-button">No, I'm not done</button>
     </div>
   )
 }

@@ -1,76 +1,71 @@
 import React, { useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
-import { currentUserState, usersState } from '../recoil/atoms'
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil'
+import { currentUserState, usersState, counterOfferUserState, requestArrayState, counterArrayState, requestState, counterOfferState, dealIdState } from '../recoil/atoms'
 import { Image, Transformation } from 'cloudinary-react'
 import api from '../api/posts'
-import AllTradesItemCard from './AllTradesItemCard'
+import TradeDashboardCardDetails from './TradeDashboardCardDetails'
+import { useNavigate } from 'react-router-dom'
 
-function TradeDashboardCard({ deal }) {
+function TradeDashboardCard({ request, counter, dealId }) {
   
-const currentUser = useRecoilValue(currentUserState)
-const [requestsBasket, setRequestsBasket] = useState([])
-const users = useRecoilValue(usersState)
+const navigate = useNavigate()    
+const [requestArray, setRequestArray] = useRecoilState(requestArrayState)
+const [counterArray, setCounterArray] = useRecoilState(counterArrayState)
+const setRequest = useSetRecoilState(requestState)
+const setCounter = useSetRecoilState(counterOfferState)
+const setCounterUser = useSetRecoilState(counterOfferUserState)
+const setDealId = useSetRecoilState(dealIdState)
 
-//if user.all_counters.id === user.all_deals.counter_id
-//{display the counter_bag}
-//else null
+const editRequestTrade = () => {
+    setRequestArray(request.deal_request_bags)
+    setCounterArray(request.deal_counter_bags)
+    setRequest(request.request)
+    setCounter(request.counter)
+    setCounterUser(request.deal_counter_user)
+    setDealId(dealId)
+    navigate('/edit-trade')
+}
 
-console.log(currentUser)
+const editCounterTrade = () => {
+    setRequestArray([counter.deal_request_bags])
+    setCounterArray([counter.deal_counter_bags])
+    setRequest(counter.request)
+    setCounter(counter.counter)
+    setDealId(dealId)
+    navigate('/edit-trade')
+}
 
-const filtered_counters = currentUser.all_counter_bags.filter((counter) => {return counter.counter_id === deal.counter_id})
-const filtered_requests = currentUser.all_request_bags.filter((request) => {return request.request_id === deal.request_id})
+console.log(request)
 
-console.log(filtered_counters)
-
-console.log(filtered_requests)
-
-
-// const fetchBag = async (id) => {    
-//     const response = await api.get(`bag/${id}`)
-//     try {
-//         setRequestsBasket([...requestsBasket, response.data])
-//     }
-//     catch (error) {
-//         console.log(`Error ${error}`)
-//     }
-// }
-
-// useEffect(() => {
-// const fetchRequests = () => {
-//     filtered_requests.map((request) => {
-//     fetchBag(request.bag_id)
-// })
-// }
-// fetchRequests();
-// },[])
-// console.log(requestsBasket)
-
-//if user.all_requests.id === user.all_deals.request_id
-//{display the request_bag}
-//else null
-
-
-// const userDeals = user.all_deals.map((deal) => <Image cloudName={'chenkhov'} publicId={}>)
-  
-
+// const displayRequests = request.all_request_bags.map((request) => <TradeDashboardCardDetails key={request.id} request={request} />)
+// const displayCounters = request.all_counter_bags.map((counter) => <TradeDashboardCardDetails key={counter.id} counter={counter} />)
+    
+// const displayCounterRequests = counter.all_request_bags.map((request) => <TradeDashboardCardDetails key={request.id} request={request} />)
+// const displayCounterCounters = counter.all_counter_bags.map((counter) => <TradeDashboardCardDetails key={counter.id} counter={counter} />)
 
 return (
     <div>
-        <div>
-            <h2>Requests</h2>
-            {filtered_requests.map((request) => <AllTradesItemCard request={request} />)}
+        {request ?
+        <div> 
+        <h3>Requested Items in this Trade:</h3>
+        {request.all_request_bags.map((request) => <TradeDashboardCardDetails key={request.id} request={request} />)}
+        <h3>Offered Items in this Trade</h3>
+        {request.all_counter_bags.map((counter) => <TradeDashboardCardDetails key={counter.id} counter={counter} />)}
+        <button onClick={editRequestTrade}>Edit This Trade</button>
         </div>
-        <div>
-            <h2>Counters</h2>
-            {filtered_counters.map((counter) => <AllTradesItemCard counter={counter} />)}
+        : null }
+
+        {counter ?
+        <div> 
+        <h3>Items Requested from you in this Trade:</h3>
+        {counter.all_request_bags.map((request) => <TradeDashboardCardDetails key={request.id} request={request} />)}
+        <h3>Offered Items in this Trade</h3>
+        {counter.all_counter_bags.map((counter) => <TradeDashboardCardDetails key={counter.id} counter={counter} />)}
+        <button onClick={editCounterTrade}>Edit This Trade</button>
         </div>
-        
-        {/* <div>
-            <Image cloudName={'chenkhov'} publicId={user.avatar_url} alt={user.username}>
-                <Transformation aspectRatio="1:1" background="#ffffff" border="0px_solid_rgb:ffffff" gravity="auto" radius="max" width="150" crop="fill" />
-            </Image>
-            <h2 name={user.id}> {user.username}</h2>
-        </div> */}
+        : null }
+
+
     </div>
   )
 }

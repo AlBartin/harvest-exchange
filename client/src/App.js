@@ -12,6 +12,7 @@ import ItemsContainer from "./components/ItemsContainer"
 import CurrentTradeContainer from './components/CurrentTradeContainer'
 import ErrorPage from './components/ErrorPage'
 import AllTradesContainer from './components/AllTradesContainer'
+import EditTradeContainer from './components/EditTradeContainer'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/all-items" element={<ItemsContainer />} />
         <Route path="/current-trades" element={<CurrentTradeContainer />} />
         <Route path="/trades" element={<AllTradesContainer />} />
+        <Route path="/edit-trade" element={<EditTradeContainer />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </Router>

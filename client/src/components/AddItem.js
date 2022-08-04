@@ -82,7 +82,7 @@ const AddItem = () => {
             <select type='string' name="measurementUnits" value={newItem.measurementUnits} onChange={handleChange}>
             {units.map(unit => <option key={unit}> {unit}</option>)}
             </select><br/>
-            <input type='submit'/>
+            <input className="item-card-button" type='submit'/>
         </form>
 
 

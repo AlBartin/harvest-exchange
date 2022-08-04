@@ -1,13 +1,13 @@
 import React from 'react'
-import { dealState, requestState, requestArrayState, counterOfferState, counterArrayState, currentUserState } from '../recoil/atoms'
+import { dealState, dealIdState, requestState, requestArrayState, counterOfferState, counterOfferUserState, counterArrayState, currentUserState } from '../recoil/atoms'
 import { useResetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
 import { Image, Transformation } from 'cloudinary-react'
 import TradeItemCard from './TradeItemCard'
-import OfferItemCard from './OfferItemCard'
+import EditTradeCard from './EditTradeCard'
 import { useNavigate } from 'react-router-dom'
 import api from '../api/posts'
 
-function CurrentTradeContainer() {
+function EditTradeContainer() {
 
     const navigate = useNavigate()
 
@@ -17,12 +17,13 @@ function CurrentTradeContainer() {
     const resetRequestArray = useResetRecoilState(requestArrayState)
     
     const counter = useRecoilValue(counterOfferState)
-    const counterUser = counter.user
+    const counterUser = useRecoilValue(counterOfferUserState)
     const counterArray = useRecoilValue(counterArrayState)
     const resetCounterArray = useResetRecoilState(counterArrayState)
 
     const [deal, setDeal] = useRecoilState(dealState)
     const resetDeal = useResetRecoilState(dealState)
+    const dealId = useRecoilValue(dealIdState)
     
     const handleDealSubmit = async (e) => {
       e.preventDefault()
@@ -35,11 +36,11 @@ function CurrentTradeContainer() {
       }
 
       try{
-          const response = await api.post('deal', deal)
-          setDeal([...deal, response.data])
+          const response = await api.patch(`deal/${dealId}`, deal)
+        //   setDeal([...deal, response.data])
           resetCounterArray()
           resetRequestArray()
-          navigate('/edit-trade')
+          navigate('/trades')
         } catch (error) {
           console.log(`Error: ${error.message}`)
         }
@@ -48,11 +49,14 @@ function CurrentTradeContainer() {
     const handleDealDelete = () => {
       resetCounterArray()
       resetRequestArray()
-      navigate('/')
+      navigate('/trades')
     }
 
     const displayCurrentUserItems = request.all_bags.map((product) => <TradeItemCard key={product.id} item={product} />)
     const displayCounterUserItems = counter.all_bags.map((product) => <TradeItemCard key={product.id} item={product} />)
+
+    console.log(requestArray)
+    console.log(counterArray)
 
   return (
     <div>
@@ -66,7 +70,7 @@ function CurrentTradeContainer() {
           <h4>Current Items Requested In This Trade: </h4>
           {requestArray.length === 0 ? <h4>No Items Currently Requested</h4>
           :
-          requestArray.map((product) => <OfferItemCard key={product.id} item={product} />)
+          requestArray.map((product) => <EditTradeCard key={product.id} item={product} quantity={product.request_quantity} />)
           }
         </div>
 
@@ -74,7 +78,7 @@ function CurrentTradeContainer() {
           <h4>Current Items Offered In This Trade: </h4>
           {counterArray.length === 0 ? <h4>No Items Currently in Offer</h4>
           :
-          counterArray.map((product) => <OfferItemCard key={product.id} item={product} />)
+          counterArray.map((product) => <EditTradeCard key={product.id} item={product} quantity={product.counter_quantity} />)
           }
         </div>
 
@@ -96,4 +100,4 @@ function CurrentTradeContainer() {
   )
 }
 
-export default CurrentTradeContainer
+export default EditTradeContainer

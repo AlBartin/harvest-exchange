@@ -2,7 +2,7 @@ import React from 'react'
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { currentUserState, userBasketState } from '../recoil/atoms'
+import { currentUserState, userBasketState, dealState, requestBagState, counterBagState } from '../recoil/atoms'
 import api from '../api/posts'
 
 const Login = () => {
@@ -11,10 +11,13 @@ const Login = () => {
     const errRef = useRef()
 
     const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
+    const setDeals = useSetRecoilState(dealState)
     const [pass, setPass] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const [loginForm, setLoginForm] = useState('')
     const setUserBasket = useSetRecoilState(userBasketState)
+    const setRequestBag = useSetRecoilState(requestBagState)
+    const setCounterBag = useSetRecoilState(counterBagState)
 
     useEffect(() => {
         userRef.current.focus()
@@ -35,6 +38,10 @@ const Login = () => {
             })
         setCurrentUser(response.data)
         setUserBasket(response.data.all_bags)
+        setDeals(response.data.all_deals)
+        // setRequestBag(response.data.all_request_bags)
+        // setCounterBag(response.data.all_counter_bags)
+    
         localStorage.setItem('user', JSON.stringify(response.data))
         localStorage.setItem('userBasket', JSON.stringify(response.data.all_bags))
         navigate('/', { replace: true })

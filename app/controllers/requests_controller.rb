@@ -1,5 +1,9 @@
 class RequestsController < ApplicationController
 
+    def index
+        render json: Request.all
+    end
+    
     def create
         new_request = Request.create!(request_params)
         render json: new_request, status: :created

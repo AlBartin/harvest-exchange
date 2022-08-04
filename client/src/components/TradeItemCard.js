@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useRecoilValue, useRecoilState } from 'recoil'
-import { currentUserState, counterOfferState, counterOfferBagState, counterArrayState, requestState, requestBagState, requestArrayState } from '../recoil/atoms'
+import { currentUserState, counterOfferState, counterBagState, counterArrayState, requestState, requestBagState, requestArrayState } from '../recoil/atoms'
 import { Image, Transformation } from 'cloudinary-react'
 import api from '../api/posts'
 
@@ -8,16 +8,16 @@ function TradeItemCard({ item }) {
 
   const currentUser = useRecoilValue(currentUserState)
   const counter = useRecoilValue(counterOfferState)
-  const [counterBag, setCounterBag] = useRecoilState(counterOfferBagState)
+  //const [counterBag, setCounterBag] = useRecoilState(counterBagState)
   const [counterArray, setCounterArray] = useRecoilState(counterArrayState)
     
   const request = useRecoilValue(requestState)
-  const [requestBag, setRequestBag] = useRecoilState(requestBagState)
+  //const [requestBag, setRequestBag] = useRecoilState(requestBagState)
   const [requestArray, setRequestArray] = useRecoilState(requestArrayState)
 
 
   const handleRequestBag = async () => {
-    setRequestBag([...requestBag, item])
+    //setRequestBag([...requestBag, item])
     const requestItem = {
       request_id: request.id,
       bag_id: item.id,
@@ -35,7 +35,7 @@ function TradeItemCard({ item }) {
   }
   
   const handleOfferBag = async () => {
-    setCounterBag([...counterBag, item])
+    //setCounterBag([...counterBag, item])
     const offerItem = {
       counter_id: counter.id,
       bag_id: item.id,

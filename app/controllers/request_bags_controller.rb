@@ -1,5 +1,9 @@
 class RequestBagsController < ApplicationController
 
+   def index
+      render json: RequestBag.all
+   end
+
     def create
         new_request_bag = RequestBag.create!(request_bag_params)
         render json: new_request_bag, status: :created

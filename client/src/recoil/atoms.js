@@ -67,8 +67,8 @@ export const counterOfferState = atom({
     default: ''
 })
 
-export const counterOfferBagState = atom({
-    key: 'counterOfferBagState',
+export const counterBagState = atom({
+    key: 'counterBagState',
     default: []
 })
 
@@ -85,6 +85,11 @@ export const counterArrayState = atom({
 export const dealState = atom({
     key: 'dealState',
     default: []
+})
+
+export const dealIdState = atom({
+    key: 'dealIdState',
+    default: ''
 })
 
 export const userBasketState = atom({
