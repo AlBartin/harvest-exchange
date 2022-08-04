@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
+body, h1, h2, h3, h4, h5, h6  {
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
 .offscreen {
   position: absolute;
   left: -9999px;
@@ -12,11 +16,6 @@
   padding: 0.5rem;
   margin-bottom: 0.5rem;
 }
-
-* {
-/* background-color: rgb(243, 176, 104); */
-}
-
 
 .header {
   display: flex;
@@ -52,15 +51,28 @@
 }
 
 .mission-container {
-  min-height: 75vh;
-  align-self: left;
-  max-width: 30vh;
-  align-items: center;
+  display: flex;
+  min-height: 30vh;
+  max-height: 40vh;
+  justify-content: center;
+  max-width: 25vw;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+  border: 2px solid rgb(34, 58, 20);
+  padding: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.mission-container:h2 {
+  display: flex;
+  justify-content: center;
 }
 
 .current-items-container {
   min-height: 75vh;
   flex-grow: 2;
+  margin-left: 1rem auto;
+  padding: 1rem;
 }
 
 .listed-items-container {
@@ -152,6 +164,8 @@ user-button:hover, a:hover {
 .all-users-container {
   display: flex;
   flex-wrap: wrap;
+
+  margin: 1rem;
 }
 
 .item-card-button {
@@ -191,4 +205,67 @@ user-button:hover, a:hover {
   text-align: center;
   justify-content: center;
   padding: 1rem;
+}
+
+.image-container{
+  display: flex;
+  min-height: 30vh;
+  align-self: left;
+  max-width: 30vh;
+  align-items: center;
+}
+
+.add-item-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 2px solid rgb(34, 58, 20);
+  padding: 2rem;
+}  
+  
+.add-item-form label {
+  display: block;
+}
+
+.add-item-form input {
+  display: block;
+  width: 100%
+}
+
+.add-item-form textarea {
+  display: block;
+  width: 100%;
+}
+
+.add-item-button {
+  display: flex;
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: rgb(34, 58, 20);
+  text-align: center;
+  cursor: pointer;
+  width: 12vw;
+  font-size: 18px;
+}
+
+.signup-form {
+  max-width: 900px;
+  min-height: 1000px;
+  margin: 2rem auto;
+  border: 2px solid rgb(34, 58, 20);
+  padding: 2rem;
+}
+
+.signup-image-container {
+  display: flex;
+  align-self: left;
+  max-width: 20vh;
+  align-items: center;
+}
+
+.profile-images {
+  display: flex;
+  flex-wrap: wrap;
 }

@@ -36,10 +36,10 @@ function CurrentTradeContainer() {
 
       try{
           const response = await api.post('deal', deal)
-          setDeal([...deal, response.data])
+          setDeal(response.data)
           resetCounterArray()
           resetRequestArray()
-          navigate('/edit-trade')
+          navigate('/')
         } catch (error) {
           console.log(`Error: ${error.message}`)
         }

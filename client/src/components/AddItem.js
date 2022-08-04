@@ -64,7 +64,7 @@ const AddItem = () => {
 
 
     return (
-    <div>
+    <div className="add-item-form">
         <form onSubmit={handleSubmit}>
             <label>Name of product:</label>
             <input type='text' name="itemName" value={newItem.itemName} onChange={handleChange} /><br/>
@@ -85,13 +85,14 @@ const AddItem = () => {
             <input className="item-card-button" type='submit'/>
         </form>
 
-
+        <div className="image-container">
         <input type="file" onChange={(e) => {setImageSelected(e.target.files[0])}} />
-        <button onClick={uploadImage}>Upload Image</button><br/>
+        <button className="add-item-button" onClick={uploadImage}>Upload Image</button><br/>
 
         <Image cloudName={'chenkhov'} publicId={image}>
-        <Transformation width="500" height="500" crop="scale" />
+        <Transformation width="350" crop="scale" />
         </Image>
+        </div>
     </div>
   )
 }

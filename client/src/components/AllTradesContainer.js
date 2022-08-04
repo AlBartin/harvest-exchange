@@ -15,7 +15,7 @@ function AllTradesContainer() {
     const [counterBag, setCounterBag] = useRecoilState(counterBagState)
     
 
-    const displayDeals = deals.map((deal) => <TradeDashboardCard key={deal.id} deal={deal} />)
+    //const displayDeals = deals.map((deal) => <TradeDashboardCard key={deal.id} deal={deal} />)
 
     // useEffect(() => {
     //   const fetchRequests = async () => {

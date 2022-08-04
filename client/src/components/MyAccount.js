@@ -49,7 +49,7 @@ function MyAccount () {
           </Image>
           <h4>Address: {street_address}<br/>{city_address}, {state_address} {zipcode}</h4>
           </div>
-          {userItems ? <div>{userItems}</div> : <h3>You do not have any items up for trade</h3> }
+          {userItems ? <div className="profile-images">{userItems}</div> : <h3>You do not have any items up for trade</h3> }
         </div>
       )
     }

@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-    has_many :bags
-    has_many :requests
-    has_many :counters
-    has_many :request_bags, through: :requests
-    has_many :counter_bags, through: :counters
+    has_many :bags, dependent: :destroy
+    has_many :requests, dependent: :destroy
+    has_many :counters, dependent: :destroy
+    has_many :request_bags, through: :requests, dependent: :destroy
+    has_many :counter_bags, through: :counters, dependent: :destroy
     #has_many :poly_deals, as: :dealable
     # has_many :poly_deals, -> (user) {
     #   unscope(where: :user_id).

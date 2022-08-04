@@ -56,7 +56,7 @@ function Home() {
                 Mission Statement
             </h2>
             <p>
-                Harvest Exchange prides itself in connecting home growers who are leading and teaching members of their communities responsibly sustainable and organic gardening.
+                Harvest Exchange prides itself in connecting home growers who are leading and teaching members in their communities responsible, sustainable, and organic gardening.
             </p>
         </div>
         <div className="current-items-container">

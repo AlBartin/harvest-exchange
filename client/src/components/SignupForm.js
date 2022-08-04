@@ -92,7 +92,7 @@ function SignupForm() {
       }
 
     return(
-    <div>
+    <div className="signup-form">
       <div>
       <h1>Sign Up</h1>
       <form onSubmit={handleFormSubmit}>
@@ -118,22 +118,22 @@ function SignupForm() {
             </select>
         <label>Zip Code</label>
         <input type='string' name='zipcode' value={signupData.zipcode} onChange={handleFormChange}/><br/>
-        <input type='submit' />
+        <input className="add-item-button" type='submit' />
       </form>
       </div>
-      <div>
+      <div className="signup-image-container">
       <label>Show us your garden:</label>
-        <input type='file' onChange={(e) => {setImageSelected(e.target.files[0])}} /><button onClick={uploadGardenImage}>Upload Image</button><br/>
+        <input type='file' onChange={(e) => {setImageSelected(e.target.files[0])}} /><button className="add-item-button" onClick={uploadGardenImage}>Upload Image</button><br/>
         <Image cloudName={'chenkhov'} publicId={gardenImage}>
-        <Transformation width="500" crop="scale" />
+        <Transformation width="400" crop="scale" />
         </Image> <br/>
       </div>
 
-      <div>
+      <div className="signup-image-container">
       <label>Profile Avatar</label>
-        <input type='file' onChange={(e) => {setImageSelected(e.target.files[0])}} /><button onClick={uploadAvatarImage}>Upload Image</button><br/>
+        <input type='file' onChange={(e) => {setImageSelected(e.target.files[0])}} /><button className="add-item-button" onClick={uploadAvatarImage}>Upload Image</button><br/>
         <Image cloudName={'chenkhov'} publicId={image}>
-        <Transformation height="250" crop="scale" />
+        <Transformation height="240" crop="scale" />
         </Image> <br/>
       </div>
     </div>

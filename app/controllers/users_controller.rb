@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     
       def update
         if current_user
-          current_user.update!(user_params)
+          current_user.update!(update_params)
           render json: current_user, status: :accepted
         else
           render json: { errors: ["Unauthorized action"] }, status: 401
@@ -39,6 +39,10 @@ class UsersController < ApplicationController
 
       def user_params
         params.permit(:email, :username, :password, :password_confirmation, :avatar_url, :personal_image, :crops_grown, :in_search_of_crops, :street_address, :city_address, :state_address, :zipcode)
+      end
+
+      def update_params
+        params.permit(:username)
       end
 
 end
