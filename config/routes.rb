@@ -25,12 +25,15 @@ Rails.application.routes.draw do
 
   post 'request-bag', to: 'request_bags#create'
   delete 'request-bag/:id', to: 'request_bags#destroy'
+  patch 'request-bag/:id', to: 'request_bags#update'
 
   post 'counter', to: 'counters#create'
   delete 'counter/:id', to: 'counter#destroy'
 
+
   post 'counter-bag', to: 'counter_bags#create'
   delete 'counter-bag/:id', to: 'counter_bags#destroy'
+  patch 'counter-bag/:id', to: 'counter_bags#update'
 
   post 'deal', to: 'deals#create'
 

@@ -32,8 +32,7 @@ ActiveRecord::Schema.define(version: 2022_07_22_065312) do
     t.bigint "counter_id", null: false
     t.bigint "bag_id", null: false
     t.integer "counter_quantity"
-    t.string "item_name"
-    t.string "image_url"
+    t.string "measurement_units"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bag_id"], name: "index_counter_bags_on_bag_id"
@@ -72,8 +71,7 @@ ActiveRecord::Schema.define(version: 2022_07_22_065312) do
     t.bigint "request_id", null: false
     t.bigint "bag_id", null: false
     t.integer "request_quantity"
-    t.string "item_name"
-    t.string "image_url"
+    t.string "measurement_units"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bag_id"], name: "index_request_bags_on_bag_id"

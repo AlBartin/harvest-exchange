@@ -21,7 +21,8 @@ function TradeItemCard({ item }) {
     const requestItem = {
       request_id: request.id,
       bag_id: item.id,
-      request_quantity: 0
+      request_quantity: 0,
+      measurement_units: item.measurement_units
     }
       console.log(requestItem)
 
@@ -38,7 +39,8 @@ function TradeItemCard({ item }) {
     const offerItem = {
       counter_id: counter.id,
       bag_id: item.id,
-      counter_quantity: 0
+      counter_quantity: 0,
+      measurement_units: item.measurement_units
     }
     console.log(offerItem)
     try{

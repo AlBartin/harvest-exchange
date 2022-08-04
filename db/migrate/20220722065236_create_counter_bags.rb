@@ -4,8 +4,7 @@ class CreateCounterBags < ActiveRecord::Migration[6.1]
       t.references :counter, null: false, foreign_key: true
       t.references :bag, null: false, foreign_key: true
       t.integer :counter_quantity
-      t.string :item_name
-      t.string :image_url
+      t.string :measurement_units
 
       t.timestamps
     end

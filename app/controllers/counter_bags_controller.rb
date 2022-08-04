@@ -4,6 +4,16 @@ class CounterBagsController < ApplicationController
         render json: new_counter_bag, status: :created
      end
 
+     def update
+      counter = CounterBag.find(params[:id])
+      if (counter)
+         counter.update!(update_params)
+         render json: counter, status: :accepted
+     else
+         render json: { errors: ["Unauthorized action"] }, status: 401
+      end
+    end
+
      def destroy
       counter = CounterBag.find(params[:id])
       counter.destroy
@@ -12,6 +22,10 @@ class CounterBagsController < ApplicationController
      private
 
      def counter_bag_params
-        params.permit(:counter_id, :bag_id, :counter_quantity, :item_name, :image_url)
+        params.permit(:counter_id, :bag_id, :counter_quantity, :measurement_units)
+     end
+
+     def update_params
+      params.permit(:counter_quantity)
      end
 end
