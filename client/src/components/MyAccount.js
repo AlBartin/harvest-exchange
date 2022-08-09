@@ -3,7 +3,6 @@ import { currentUserState, userBasketState } from '../recoil/atoms'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { Image, Transformation } from 'cloudinary-react'
 import ItemCard from './ItemCard'
-// import { Axios } from 'axios'
 import api from '../api/posts'
 
 
@@ -29,14 +28,6 @@ function MyAccount () {
   }, [])
     const userItems = userItemsArray.map((product) => <ItemCard key={product.id} item={product} />)
     
-    console.log(currentUser)
-    
-    //**************THIS WORKS*********** */
-    // const userBasket = useRecoilValue(userBasketState)
-    // const userItems = userBasket.map((product) => <ItemCard key={product.id} item={product} />)
-    
-
-
     return (
         <div>
           <div>

@@ -13,37 +13,6 @@ function AllTradesContainer() {
 
     const [requestBag, setRequestBag] = useRecoilState(requestBagState)
     const [counterBag, setCounterBag] = useRecoilState(counterBagState)
-    
-
-    //const displayDeals = deals.map((deal) => <TradeDashboardCard key={deal.id} deal={deal} />)
-
-    // useEffect(() => {
-    //   const fetchRequests = async () => {
-    //     try{
-    //       const response = await api.get('requests')
-    //       setRequestBag(response.data)
-    //       console.log(response.data)
-    //     }
-    //     catch(error) {
-    //       console.log(`Error: ${error}`)
-    //     }
-    //   }
-    //   fetchRequests();
-    // }, [])
-
-    // useEffect(() => {
-    //   const fetchCounters = async () => {
-    //     try{
-    //       const response = await api.get('counters')
-    //       setCounterBag(response.data)
-    //       console.log(response.data)
-    //     }
-    //     catch(error) {
-    //       console.log(`Error: ${error}`)
-    //     }
-    //   }
-    //   fetchCounters();
-    // }, [])
 
     useEffect(() => {
       const fetchDeals = async () => {

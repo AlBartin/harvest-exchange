@@ -71,24 +71,6 @@ function SignupForm() {
         console.log(`Error: ${error.message}`)
       }
 
-      // axios.post('/signup', { 
-      //   email: signupData.email,
-      //   username: signupData.username,
-      //   password: signupData.password,
-      //   password_confirmation: signupData.passwordConfirm,
-      //   avatar_url: signupData.avatarUrl,
-      //   personal_image: signupData.personalImage,
-      //   crops_grown: signupData.cropsGrown,
-      //   in_search_of_crops: signupData.inSearchOfCrops,
-      //   street_address: signupData.streetAddress,
-      //   city_address: signupData.cityAddress,
-      //   state_address: signupData.stateAddress,
-      //   zipcode: signupData.zipcode })
-      // .then((response) => { setSignupData(response.data)
-      // })
-      // .catch((error) => console.log(error))
-      // console.log(`Avatar: ${image}`)
-      // console.log(`Garden: ${gardenImage}`)
       }
 
     return(

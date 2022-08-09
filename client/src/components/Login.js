@@ -39,8 +39,6 @@ const Login = () => {
         setCurrentUser(response.data)
         setUserBasket(response.data.all_bags)
         setDeals(response.data.all_deals)
-        // setRequestBag(response.data.all_request_bags)
-        // setCounterBag(response.data.all_counter_bags)
     
         localStorage.setItem('user', JSON.stringify(response.data))
         localStorage.setItem('userBasket', JSON.stringify(response.data.all_bags))

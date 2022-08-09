@@ -4,13 +4,6 @@ class User < ApplicationRecord
     has_many :counters, dependent: :destroy
     has_many :request_bags, through: :requests, dependent: :destroy
     has_many :counter_bags, through: :counters, dependent: :destroy
-    #has_many :poly_deals, as: :dealable
-    # has_many :poly_deals, -> (user) {
-    #   unscope(where: :user_id).
-    #   where(dealable: [user.requests, user.counters])
-    # }
-    #has_many :deals, through: :requests
-    # has_many :deals, through: :counters
     has_many :deals, ->(user) {
       unscope(where: :user_id).
       left_joins(:request, :counter).
